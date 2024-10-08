@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "C:\\Users\\devin\\source\\repos\\EventFlow\\EventFlow.Server\\..\\eventflow.client",
+"WorkingDirectory": "C:\\Users\\carso\\source1\\EventFlow-1\\EventFlow.Server\\..\\eventflow.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }
