@@ -1,25 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\carso\\source1\\EventFlow-1\\EventFlow.Server\\EventFlow.Server.csproj": {}
+    "C:\\Users\\guo15798\\source\\repos\\EventFlow\\EventFlow.Server\\EventFlow.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\carso\\source1\\EventFlow-1\\EventFlow.Server\\EventFlow.Server.csproj": {
+    "C:\\Users\\guo15798\\source\\repos\\EventFlow\\EventFlow.Server\\EventFlow.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\carso\\source1\\EventFlow-1\\EventFlow.Server\\EventFlow.Server.csproj",
+        "projectUniqueName": "C:\\Users\\guo15798\\source\\repos\\EventFlow\\EventFlow.Server\\EventFlow.Server.csproj",
         "projectName": "EventFlow.Server",
-        "projectPath": "C:\\Users\\carso\\source1\\EventFlow-1\\EventFlow.Server\\EventFlow.Server.csproj",
-        "packagesPath": "C:\\Users\\carso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\carso\\source1\\EventFlow-1\\EventFlow.Server\\obj\\",
+        "projectPath": "C:\\Users\\guo15798\\source\\repos\\EventFlow\\EventFlow.Server\\EventFlow.Server.csproj",
+        "packagesPath": "C:\\Users\\guo15798\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\guo15798\\source\\repos\\EventFlow\\EventFlow.Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\carso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\guo15798\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,6 +35,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -41,6 +49,10 @@
             "Microsoft.AspNetCore.SpaProxy": {
               "target": "Package",
               "version": "[8.*-*, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[9.1.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -66,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
