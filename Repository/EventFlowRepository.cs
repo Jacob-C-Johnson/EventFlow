@@ -1,3 +1,4 @@
+using EventFlow.Models;
 using MySql.Data.MySqlClient;
 
 namespace EventFlow.Repository {
@@ -149,6 +150,7 @@ namespace EventFlow.Repository {
                                 UserId = reader.GetInt32(reader.GetOrdinal("User_user_id")),
                                 EventId = reader.GetInt32(reader.GetOrdinal("Event_event_id"))
                             };
+                            return reservationDetails;
                         }
                         else
                         {
