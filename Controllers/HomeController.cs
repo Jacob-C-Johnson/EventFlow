@@ -22,12 +22,19 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpPost]
-    [Route("/GetReservation")]
+    [HttpGet("/GetReservation/{reservationid}")]
     public async Task<IActionResult> GetReservation(int reservationid)
     {
-        var reservation = await _eventFlowRepository.GetReservation(reservationid);   
-        return Json(new { reservation });
+        try
+        {
+            var reservation = await _eventFlowRepository.GetReservation(reservationid);
+            return Json(new { reservation });
+        } catch (Exception ex) 
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+        
     }
 
     public IActionResult Privacy()
