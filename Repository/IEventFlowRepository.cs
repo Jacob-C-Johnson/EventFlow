@@ -1,4 +1,4 @@
-using EventFlow.Server.Models;
+using EventFlow.Models;
 
 namespace EventFlow.Repository {
     public interface IEventFlowRepository {

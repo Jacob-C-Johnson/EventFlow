@@ -33,8 +33,8 @@ namespace EventFlow.Repository {
                         if (await reader.ReadAsync()) {
                             var reservationTime = reader.GetString(reader.GetOrdinal("reservation_time"));
                             var reservationDate = reader.GetString(reader.GetOrdinal("reservation_date"));
-                            reservationDetails.append(reservationTime);
-                            reservationDetails.append(reservationDate);
+                            reservationDetails.Add(reservationTime);
+                            reservationDetails.Add(reservationDate);
 
                             return reservationDetails;
                         } else {
