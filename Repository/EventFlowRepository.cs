@@ -125,10 +125,12 @@ namespace EventFlow.Repository {
             }
         }
         
-        public async Task<List<(int ReservationId, string ReservationTime, string ReservationDate, string Status, int UserId, int EventId)>> GetReservation(int reservationId)
+        public async Task<Reservation> GetReservation(int reservationId)
         {
             using (MySqlConnection _connection = new MySqlConnection(_connectionString))
             {
+        
+        
                 await _connection.OpenAsync();
                 var statement = "SELECT reservation_id, reservation_time, reservation_date, status, User_user_id, Event_event_id FROM reservation WHERE reservation_id = @reservationId";
                 using (MySqlCommand command = new MySqlCommand(statement, _connection))
@@ -139,13 +141,14 @@ namespace EventFlow.Repository {
                     {
                         if (await reader.ReadAsync())
                         {
-                            var reservationTime = reader.GetString(reader.GetOrdinal("reservation_time"));
-                            var reservationDate = reader.GetString(reader.GetOrdinal("reservation_date"));
-                            var status = reader.GetString(reader.GetOrdinal("status"));
-                            var userId = reader.GetInt32(reader.GetOrdinal("User_user_id"));
-                            var eventId = reader.GetInt32(reader.GetOrdinal("Event_event_id"));
-        
-                            return (reservationId, reservationTime, reservationDate, status, userId, eventId);
+                            var reservationDetails = new Reservation
+                            {
+                                ReservationTime = reader.GetString(reader.GetOrdinal("reservation_time")),
+                                ReservationDate = reader.GetString(reader.GetOrdinal("reservation_date")),
+                                Status = reader.GetString(reader.GetOrdinal("status")),
+                                UserId = reader.GetInt32(reader.GetOrdinal("User_user_id")),
+                                EventId = reader.GetInt32(reader.GetOrdinal("Event_event_id"))
+                            };
                         }
                         else
                         {
