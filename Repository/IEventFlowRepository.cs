@@ -8,6 +8,6 @@ namespace EventFlow.Repository {
         public Task<int> AddUser(string userName, string userEmail);
         public Task<int> AddReservation(string reservationTime, string reservationDate, string status, int userId, int eventId);
         public Task DeleteReservation(int reservationId);
-        public Task<List<(int ReservationId, string ReservationTime, string ReservationDate, string Status, int UserId, int EventId)>> GetReservation(int reservationId);
+        public Task<Reservation> GetReservation(int reservationId);
             }
 }
