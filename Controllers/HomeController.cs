@@ -29,7 +29,8 @@ public class HomeController : Controller
         {
             var reservation = await _eventFlowRepository.GetReservation(reservationid);
             return Json(new { reservation });
-        } catch (Exception ex) 
+        } 
+        catch (Exception ex) 
         {
             _logger.LogError(ex.Message, ex);
             return BadRequest(ex.Message);
