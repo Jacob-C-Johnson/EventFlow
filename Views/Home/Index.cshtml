@@ -1,10 +1,23 @@
 ﻿@model ReservationViewModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to EventFlow</h1>
+    <p>Plan and manage your events seamlessly</p>
 </div>
+
+<div id="event-actions" class="text-center">
+    <button onclick="viewAllEvents()">View All Events</button>
+    <button onclick="createReservation()">Create a Reservation</button>
+    <button onclick="viewMyReservations()">My Reservations</button>
+
+    
+</div>
+
+<div id="content" class="mt-4"></div>
+
+<!-- Link to site.js -->
+<script src="js/site.js"></script>
