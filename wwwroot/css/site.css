@@ -20,3 +20,48 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#event-actions button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#event-actions button:hover {
+  background-color: #0056b3;
+}
+
+form div {
+  margin: 10px 0;
+}
+
+form label {
+  display: inline-block;
+  width: 150px;
+}
+
+form input {
+  padding: 5px;
+  width: 200px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #f9f9f9;
+  margin: 5px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#content{
+  align-items: center;
+}
