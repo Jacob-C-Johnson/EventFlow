@@ -160,5 +160,35 @@ namespace EventFlow.Repository {
                 }
             }
         }
+        public async Task UpdateReservation(int reservationId, string reservationTime, string reservationDate, string status)
+        {
+            using (MySqlConnection _connection = new MySqlConnection(_connectionString))
+            {
+                await _connection.OpenAsync();
+
+                const string statement = @"
+                    UPDATE reservation 
+                    SET 
+                        reservation_time = @reservationTime, 
+                        reservation_date = @reservationDate, 
+                        status = @status 
+                    WHERE reservation_id = @reservationId";
+
+                using (MySqlCommand command = new MySqlCommand(statement, _connection))
+                {
+                    command.Parameters.Add(new MySqlParameter("@reservationId", MySqlDbType.Int32) { Value = reservationId });
+                    command.Parameters.Add(new MySqlParameter("@reservationTime", MySqlDbType.VarChar, 45) { Value = reservationTime });
+                    command.Parameters.Add(new MySqlParameter("@reservationDate", MySqlDbType.VarChar, 45) { Value = reservationDate });
+                    command.Parameters.Add(new MySqlParameter("@status", MySqlDbType.VarChar, 45) { Value = status });
+
+                    var rowsAffected = await command.ExecuteNonQueryAsync();
+                    if (rowsAffected == 0)
+                    {
+                        throw new Exception($"No reservation found with ID {reservationId}.");
+                    }
+                }
+            }
+        }
+
     }
 }
