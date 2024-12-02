@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 
 namespace EventFlow.Repository {
     public class EventFlowRepository : IEventFlowRepository {
-        private readonly string _connectionString = "server=localhost;userid=eventFlowAdmins;password=Ev3ntf10wg0@ts;database=event_flow";
+        private readonly string _connectionString = "server=sql5.freesqldatabase.com;database=sql5749035;user=sql5749035;password=Ev3ntf10wd@t@b@s3";
 
         public async Task<int> GetUserId (string userEmail) {
             int userId;

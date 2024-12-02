@@ -3,7 +3,6 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
-/*
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -173,5 +172,5 @@ VALUES ('13:00', '2024-11-10', 'Confirmed', 1, 1);
 -- Insert a relationship between User and Event in the User_has_Event table
 INSERT INTO `event_flow`.`User_has_Event` (`User_user_id`, `Event_event_id`)
 VALUES (1, 1);
-*/
+
 
