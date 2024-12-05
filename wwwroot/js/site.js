@@ -1,13 +1,15 @@
-﻿const apiBaseUrl = ''; // Base URL (e.g., /api/eventflow) if needed, otherwise leave as an empty string
+﻿//const apiBaseUrl = ''; // Base URL (e.g., /api/eventflow) if needed, otherwise leave as an empty string
 
 // Fetch and display all events
 async function viewAllEvents() {
     try {
-        const response = await fetch(`${apiBaseUrl}/GetAllEvents`);
+        const response = await fetch(`/GetAllEvents`);
         if (!response.ok) throw new Error('Failed to fetch events.');
 
         const data = await response.json();
-        const events = data.Events || []; // Adjust structure if backend response differs
+        const events = data.events || [];
+
+        console.log(events); // Debugging: Check the events array
 
         let contentHtml = '<h2>All Events</h2><ul>';
         if (events.length === 0) {
@@ -16,9 +18,9 @@ async function viewAllEvents() {
             events.forEach(event => {
                 contentHtml += `
                     <li>
-                        <strong>${event.Title}</strong> - ${event.EventLocation}
-                        <p>${event.EventDescription}</p>
-                        <p>Total Attendees: ${event.TotalAttendees}</p>
+                        <strong>${event.title}</strong> - ${event.eventLocation}
+                        <p>${event.eventDescription}</p>
+                        <p>Total Attendees: ${event.totalAttendees}</p>
                     </li>`;
             });
         }
@@ -30,6 +32,7 @@ async function viewAllEvents() {
         document.getElementById('content').innerHTML = '<p>Error fetching events. Please try again later.</p>';
     }
 }
+
 
 // Display the Create Reservation form
 function createReservation() {
@@ -71,7 +74,7 @@ async function submitReservation(event) {
     };
 
     try {
-        const response = await fetch(`${apiBaseUrl}/AddReservation`, {
+        const response = await fetch(`/AddReservation`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(reservation)
@@ -96,7 +99,7 @@ async function viewMyReservations() {
     if (!userId) return;
 
     try {
-        const response = await fetch(`${apiBaseUrl}/GetReservations/${userId}`);
+        const response = await fetch(`/GetReservations/${userId}`);
         if (!response.ok) throw new Error('Failed to fetch reservations.');
 
         const data = await response.json();
@@ -131,7 +134,7 @@ async function viewMyEvents() {
     if (!userId) return;
 
     try {
-        const response = await fetch(`${apiBaseUrl}/GetEventsByUser/${userId}`);
+        const response = await fetch(`/GetEventsByUser/${userId}`);
         if (!response.ok) throw new Error('Failed to fetch events.');
 
         const data = await response.json();
@@ -190,7 +193,7 @@ async function submitUser(event) {
     };
 
     try {
-        const response = await fetch(`${apiBaseUrl}/CreateUser`, {
+        const response = await fetch(`/CreateUser`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
@@ -231,7 +234,7 @@ async function submitDeleteReservation(event) {
     const reservationId = document.getElementById('reservationId').value;
 
     try {
-        const response = await fetch(`${apiBaseUrl}/DeleteReservation/${reservationId}`, {
+        const response = await fetch(`/DeleteReservation/${reservationId}`, {
             method: 'DELETE'
         });
 
@@ -287,7 +290,7 @@ async function submitUpdateReservation(event) {
     };
 
     try {
-        const response = await fetch(`${apiBaseUrl}/UpdateReservation/${reservationId}`, {
+        const response = await fetch(`/UpdateReservation/${reservationId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(reservation)

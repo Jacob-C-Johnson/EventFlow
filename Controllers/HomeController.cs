@@ -28,7 +28,7 @@ public class HomeController : Controller
         try
         {
             var reservation = await _eventFlowRepository.GetReservation(reservationid);
-            return Json(new { reservation });
+            return Ok(new { reservation });
         } 
         catch (Exception ex) 
         {
@@ -103,8 +103,8 @@ public class HomeController : Controller
     {
         try
         {
-            var events = await _eventFlowRepository.GetAllEvents();
-            return Json(new { events });
+            List<Event> events = await _eventFlowRepository.GetAllEvents();
+            return Ok(new { events }); // Ensure the response has an 'events' property
         }
         catch (Exception ex)
         {

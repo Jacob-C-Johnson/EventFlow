@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4BQqPA2FHnSRJ2gVbJnXZ8p4cFYuDAEcW6HL730b04jaf5K0D3KesM9juglrx0InQl9NlPuRid8atCCs01tu/w==",
+  "dgSpecHash": "qFW3trq6boz3Se8jE2uu9g7xTYiB5dM3YGpHH1OyCc/FOZW3564Q3xND602o62eDjNkvy7dTLFQWlRHCGjL4BA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj",
+  "projectFilePath": "c:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\carso\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\carso\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",

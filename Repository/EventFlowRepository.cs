@@ -3,13 +3,13 @@ using MySql.Data.MySqlClient;
 
 namespace EventFlow.Repository {
     public class EventFlowRepository : IEventFlowRepository {
-        private readonly string _connectionString = "server=sql5.freesqldatabase.com;database=sql5749035;user=sql5749035;password=Ev3ntf10wd@t@b@s3";
+        private readonly string _connectionString = "server=sql5.freesqldatabase.com;database=sql5749035;user=sql5749035;password=JzRRxAi2Xk";
 
         public async Task<int> GetUserId (string userEmail) {
             int userId;
             using (MySqlConnection _connection = new MySqlConnection(_connectionString)) {
                 await _connection.OpenAsync();
-                var statement = "SELECT user_id FROM user WHERE user_email = @userEmail";
+                var statement = "SELECT user_id FROM User WHERE user_email = @userEmail";
                 using (MySqlCommand command = new MySqlCommand(statement, _connection)) {
                     command.Parameters.Add(new MySqlParameter("@userEmail", MySqlDbType.String) {Value = userEmail});
                     var result = await command.ExecuteScalarAsync();
@@ -27,7 +27,7 @@ namespace EventFlow.Repository {
             using (MySqlConnection _connection = new MySqlConnection(_connectionString)) {
                 List<string> reservationDetails = new List<string>();
                 await _connection.OpenAsync();
-                var statement1 = "SELECT reservation_time, reservation_date FROM reservation WHERE User_user_id = @userEmail";
+                var statement1 = "SELECT reservation_time, reservation_date FROM Reservation WHERE User_user_id = @userEmail";
                 using (MySqlCommand command = new MySqlCommand(statement1, _connection)) {
                     command.Parameters.Add(new MySqlParameter("@userEmail", MySqlDbType.VarChar, 100) {Value = userId});
                     using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync()) {
@@ -46,13 +46,13 @@ namespace EventFlow.Repository {
             }
         }
 
-        public async Task<List<(int EventId, string EventLocation, string EventDescription, int TotalAttendees, string Title)>> GetAllEvents()
+        public async Task<List<Event>> GetAllEvents()
         {
-            var events = new List<(int, string, string, int, string)>();
+            var events = new List<Event>();
             using (MySqlConnection _connection = new MySqlConnection(_connectionString))
             {
                 await _connection.OpenAsync();
-                var statement = "SELECT event_id, event_location, event_description, total_attendees, title FROM event";
+                var statement = "SELECT event_id, event_location, event_description, total_attendees, title FROM Event";
                 using (MySqlCommand command = new MySqlCommand(statement, _connection))
                 {
                     using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
@@ -64,8 +64,16 @@ namespace EventFlow.Repository {
                             var eventDescription = reader.GetString(reader.GetOrdinal("event_description"));
                             var totalAttendees = reader.GetInt32(reader.GetOrdinal("total_attendees"));
                             var title = reader.GetString(reader.GetOrdinal("title"));
-        
-                            events.Add((eventId, eventLocation, eventDescription, totalAttendees, title));
+
+                            Event tempEvent = new Event
+                            {
+                                EventId = eventId,
+                                EventLocation = eventLocation,
+                                EventDescription = eventDescription,
+                                TotalAttendees = totalAttendees,
+                                Title = title
+                            };
+                            events.Add(tempEvent);
                         }
                     }
                 }
@@ -78,7 +86,7 @@ namespace EventFlow.Repository {
             using (MySqlConnection _connection = new MySqlConnection(_connectionString))
             {
                 await _connection.OpenAsync();
-                var statement = "INSERT INTO user (user_name, user_email) VALUES (@userName, @userEmail)";
+                var statement = "INSERT INTO User (user_name, user_email) VALUES (@userName, @userEmail)";
                 using (MySqlCommand command = new MySqlCommand(statement, _connection))
                 {
                     command.Parameters.Add(new MySqlParameter("@userName", MySqlDbType.VarChar, 45) { Value = userName });
@@ -94,7 +102,7 @@ namespace EventFlow.Repository {
             using (MySqlConnection _connection = new MySqlConnection(_connectionString))
             {
                 await _connection.OpenAsync();
-                var statement = "INSERT INTO reservation (reservation_time, reservation_date, status, User_user_id, Event_event_id) VALUES (@reservationTime, @reservationDate, @status, @userId, @eventId)";
+                var statement = "INSERT INTO Reservation (reservation_time, reservation_date, status, User_user_id, Event_event_id) VALUES (@reservationTime, @reservationDate, @status, @userId, @eventId)";
                 using (MySqlCommand command = new MySqlCommand(statement, _connection))
                 {
                     command.Parameters.Add(new MySqlParameter("@reservationTime", MySqlDbType.VarChar, 45) { Value = reservationTime });
@@ -113,7 +121,7 @@ namespace EventFlow.Repository {
             using (MySqlConnection _connection = new MySqlConnection(_connectionString))
             {
                 await _connection.OpenAsync();
-                var statement = "DELETE FROM reservation WHERE reservation_id = @reservationId";
+                var statement = "DELETE FROM Reservation WHERE reservation_id = @reservationId";
                 using (MySqlCommand command = new MySqlCommand(statement, _connection))
                 {
                     command.Parameters.Add(new MySqlParameter("@reservationId", MySqlDbType.Int32) { Value = reservationId });
@@ -133,7 +141,7 @@ namespace EventFlow.Repository {
         
         
                 await _connection.OpenAsync();
-                var statement = "SELECT reservation_id, reservation_time, reservation_date, status, User_user_id, Event_event_id FROM reservation WHERE reservation_id = @reservationId";
+                var statement = "SELECT reservation_id, reservation_time, reservation_date, status, User_user_id, Event_event_id FROM Reservation WHERE reservation_id = @reservationId";
                 using (MySqlCommand command = new MySqlCommand(statement, _connection))
                 {
                     command.Parameters.Add(new MySqlParameter("@reservationId", MySqlDbType.Int32) { Value = reservationId });
@@ -167,7 +175,7 @@ namespace EventFlow.Repository {
                 await _connection.OpenAsync();
 
                 const string statement = @"
-                    UPDATE reservation 
+                    UPDATE Reservation 
                     SET 
                         reservation_time = @reservationTime, 
                         reservation_date = @reservationDate, 
