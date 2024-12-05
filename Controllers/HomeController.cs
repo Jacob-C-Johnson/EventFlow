@@ -38,6 +38,83 @@ public class HomeController : Controller
         
     }
 
+    [HttpPost("/CreateReservation")]
+    public async Task<IActionResult> CreateReservation([FromBody] Reservation reservation)
+    {
+        try
+        {
+            var newReservation = await _eventFlowRepository.AddReservation(reservation.ReservationTime, reservation.ReservationDate, reservation.Status, reservation.UserId, reservation.EventId);
+            return Json(new { newReservation });
+        } 
+        catch (Exception ex) 
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("/CreateUser")]
+    public async Task<IActionResult> CreateUser([FromBody] User user)
+    {
+        try
+        {
+            var newUser = await _eventFlowRepository.AddUser(user.Username, user.Email);
+            return Json(new { newUser });
+        } 
+        catch (Exception ex) 
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpDelete("/DeleteReservation/{reservationId}")]
+    public async Task<IActionResult> DeleteReservation(int reservationId)
+    {
+        try
+        {
+            await _eventFlowRepository.DeleteReservation(reservationId);
+            return Ok("Reservation deleted successfully.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPut("/UpdateReservation/{reservationId}")]
+    public async Task<IActionResult> UpdateReservation(int reservationId, [FromBody] Reservation reservation)
+    {
+        try
+        {
+            await _eventFlowRepository.UpdateReservation(reservationId, reservation.ReservationTime, reservation.ReservationDate, reservation.Status);
+            return Ok("Reservation updated successfully.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("/GetAllEvents")]
+    public async Task<IActionResult> GetAllEvents()
+    {
+        try
+        {
+            var events = await _eventFlowRepository.GetAllEvents();
+            return Json(new { events });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+    }
+
+
+
     public IActionResult Privacy()
     {
         return View();
