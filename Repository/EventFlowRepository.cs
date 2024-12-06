@@ -23,26 +23,26 @@ namespace EventFlow.Repository {
             } return userId;
         }
 
-        public async Task<List<string>> GetEventReservation(int userId) {
+        public async Task<List<Reservation>> GetEventReservation(int userId) {
             using (MySqlConnection _connection = new MySqlConnection(_connectionString)) {
-                List<string> reservationDetails = new List<string>();
+                var reservations = new List<Reservation>();
                 await _connection.OpenAsync();
-                var statement1 = "SELECT reservation_time, reservation_date FROM Reservation WHERE User_user_id = @userEmail";
-                using (MySqlCommand command = new MySqlCommand(statement1, _connection)) {
-                    command.Parameters.Add(new MySqlParameter("@userEmail", MySqlDbType.VarChar, 100) {Value = userId});
+                var statement = "SELECT reservation_id, reservation_time, reservation_date, status, Event_event_id FROM Reservation WHERE User_user_id = @userId";
+                using (MySqlCommand command = new MySqlCommand(statement, _connection)) {
+                    command.Parameters.Add(new MySqlParameter("@userId", MySqlDbType.Int32) { Value = userId });
                     using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync()) {
-                        if (await reader.ReadAsync()) {
-                            var reservationTime = reader.GetString(reader.GetOrdinal("reservation_time"));
-                            var reservationDate = reader.GetString(reader.GetOrdinal("reservation_date"));
-                            reservationDetails.Add(reservationTime);
-                            reservationDetails.Add(reservationDate);
-
-                            return reservationDetails;
-                        } else {
-                            throw new Exception("No reservation found for this user.");
+                        while (await reader.ReadAsync()) {
+                            reservations.Add(new Reservation {
+                                ReservationTime = reader.GetString("reservation_time"),
+                                ReservationDate = reader.GetString("reservation_date"),
+                                Status = reader.GetString("status"),
+                                UserId = userId,
+                                EventId = reader.GetInt32("Event_event_id")
+                            });
                         }
                     }
                 }
+                return reservations;
             }
         }
 
