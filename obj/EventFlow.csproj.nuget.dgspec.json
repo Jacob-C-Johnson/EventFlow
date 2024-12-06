@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj": {}
+    "C:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj": {}
   },
   "projects": {
-    "c:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj": {
+    "C:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj",
+        "projectUniqueName": "C:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj",
         "projectName": "EventFlow",
-        "projectPath": "c:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj",
+        "projectPath": "C:\\Users\\carso\\source1\\EventFlow\\EventFlow.csproj",
         "packagesPath": "C:\\Users\\carso\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\carso\\source1\\EventFlow\\obj\\",
+        "outputPath": "C:\\Users\\carso\\source1\\EventFlow\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\carso\\AppData\\Roaming\\NuGet\\NuGet.Config"

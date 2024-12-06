@@ -74,7 +74,7 @@ async function submitReservation(event) {
     };
 
     try {
-        const response = await fetch(`/AddReservation`, {
+        const response = await fetch(`/CreateReservation`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(reservation)
