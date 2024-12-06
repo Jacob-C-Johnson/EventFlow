@@ -103,7 +103,10 @@ async function viewMyReservations() {
         if (!response.ok) throw new Error('Failed to fetch reservations.');
 
         const data = await response.json();
-        const reservations = data.Reservations || []; // Adjust structure based on backend response
+        const reservations = data.reservation || []; // Adjust structure based on backend response
+
+        console.log(data); // Debugging: Check the data object
+        console.log(reservations); // Debugging: Check the reservations array
 
         let contentHtml = '<h2>My Reservations</h2><ul>';
         if (reservations.length === 0) {
@@ -113,9 +116,9 @@ async function viewMyReservations() {
                 contentHtml += `
                     <li>
                         ${index + 1}. 
-                        <strong>Time:</strong> ${reservation.ReservationTime}, 
-                        <strong>Date:</strong> ${reservation.ReservationDate}, 
-                        <strong>Status:</strong> ${reservation.Status}
+                        <strong>Time:</strong> ${reservation.reservationTime}, 
+                        <strong>Date:</strong> ${reservation.reservationDate}, 
+                        <strong>Status:</strong> ${reservation.status}
                     </li>`;
             });
         }

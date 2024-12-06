@@ -22,12 +22,12 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpGet("/GetReservation/{reservationid}")]
-    public async Task<IActionResult> GetReservation(int reservationid)
+    [HttpGet("/GetReservations/{userid}")]
+    public async Task<IActionResult> GetReservation(int userid)
     {
         try
         {
-            var reservation = await _eventFlowRepository.GetReservation(reservationid);
+            List<Reservation> reservation = await _eventFlowRepository.GetEventReservation(userid);
             return Ok(new { reservation });
         } 
         catch (Exception ex) 
