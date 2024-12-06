@@ -131,42 +131,6 @@ async function viewMyReservations() {
     }
 }
 
-// Fetch and display events created by the user
-async function viewMyEvents() {
-    const userId = prompt('Enter your User ID:');
-    if (!userId) return;
-
-    try {
-        const response = await fetch(`/GetEventsByUser/${userId}`);
-        if (!response.ok) throw new Error('Failed to fetch events.');
-
-        const data = await response.json();
-        const events = data.Events || []; // Adjust structure based on backend response
-
-        let contentHtml = '<h2>My Events</h2><ul>';
-        if (events.length === 0) {
-            contentHtml += '<p>No events found.</p>';
-        } else {
-            events.forEach((event, index) => {
-                contentHtml += `
-                    <li>
-                        ${index + 1}. 
-                        <strong>Title:</strong> ${event.Title}, 
-                        <strong>Location:</strong> ${event.EventLocation}, 
-                        <strong>Description:</strong> ${event.EventDescription}, 
-                        <strong>Total Attendees:</strong> ${event.TotalAttendees}
-                    </li>`;
-            });
-        }
-        contentHtml += '</ul>';
-
-        document.getElementById('content').innerHTML = contentHtml;
-    } catch (error) {
-        console.error('Error fetching events:', error);
-        document.getElementById('content').innerHTML = '<p>Error fetching events. Please try again later.</p>';
-    }
-}
-
 // Display the Create User form
 function createUser() {
     const formHtml = `

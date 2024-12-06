@@ -113,7 +113,9 @@ public class HomeController : Controller
         }
     }
 
-
+//sql5749035
+//sql5749035
+//3306
 
     public IActionResult Privacy()
     {
